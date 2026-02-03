@@ -469,7 +469,7 @@ function CheckoutContent() {
                     <div className="space-y-4">
                       {/* Plan Details */}
                       <div className="border-b pb-4">
-                        <h3 className="text-lg font-semibold text-gray-900">{offer.name} {mode ? '' : 'Plan'}</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">{offer.tierLevel === 1 ? 'Rural' : offer.tierLevel === 2 ? 'Suburban' : offer.tierLevel === 3 ? 'Urban' : offer.name} {mode ? '' : 'Plan'}</h3>
                         {(county || mode) && (
                             <p className="text-sm text-gray-600 mt-1">
                             {county ? `${county.name}, ${county.state?.abbreviation}` : 'Single Auction Lock'}
