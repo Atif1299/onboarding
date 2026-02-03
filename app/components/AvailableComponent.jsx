@@ -80,17 +80,17 @@ export default function AvailableComponent({ county }) {
 
   if (population > 500000) {
     tierName = 'Urban';
-    price = 399;
+    price = 395;
     tierLevel = 3;
     creditAmount = 1000;
   } else if (population > 50000) {
     tierName = 'Suburban';
-    price = 199;
+    price = 195;
     tierLevel = 2;
     creditAmount = 500;
   } else {
     tierName = 'Rural';
-    price = 99;
+    price = 95;
     tierLevel = 1;
     creditAmount = 250;
   }

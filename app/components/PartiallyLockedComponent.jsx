@@ -80,17 +80,17 @@ export default function PartiallyLockedComponent({ county }) {
 
   if (population > 500000) {
     tierName = 'Urban';
-    price = 399;
+    price = 395;
     tierLevel = 3;
     creditAmount = 100;
   } else if (population > 50000) {
     tierName = 'Suburban';
-    price = 199;
+    price = 195;
     tierLevel = 2;
     creditAmount = 100;
   } else {
     tierName = 'Rural';
-    price = 99;
+    price = 95;
     tierLevel = 1;
     creditAmount = 100;
   }
