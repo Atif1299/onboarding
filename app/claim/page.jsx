@@ -75,7 +75,7 @@ function ClaimPageContent() {
                 <Search className="absolute left-4 top-3.5 h-5 w-5 text-slate-400" />
                 <input
                   type="url"
-                  placeholder="https://hibid.com/lot/..."
+                  placeholder="https://hibid.com/catalog/123456/auction-name"
                   className="w-full pl-12 pr-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
@@ -231,7 +231,7 @@ function ClaimPageContent() {
                         <span className="bg-green-800 px-2 py-1 rounded text-sm">Free</span>
                     </button>
                     <p className="text-xs text-slate-500 text-center mt-2">
-                        First time users only. Includes 1 free claims.
+                        First time users only. Includes 500 credits for your trial auction.
                     </p>
                   </div>
                 )}

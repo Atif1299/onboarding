@@ -39,11 +39,12 @@ export async function POST(request) {
             );
         }
 
-        // 2. Eligibility Check
-        const MAX_TRIAL_ITEMS = 1000;
+        // 2. Eligibility Check - Allow any auction, but trial credits capped at 400
+        // Large auctions (4000+ items) are rare but allowed - user just gets 400 free items
+        const MAX_TRIAL_ITEMS = 10000; // Safety limit for extremely unusual cases
         if (scrapedData.itemCount > MAX_TRIAL_ITEMS) {
             return NextResponse.json(
-                { success: false, message: 'This auction is too large for a free trial.' },
+                { success: false, message: 'This auction is unusually large. Please contact support.' },
                 { status: 400 }
             );
         }
@@ -73,6 +74,8 @@ export async function POST(request) {
         if (!user) {
             // Create new user
             const hashedPassword = await bcrypt.hash('TempPass123!', 10);
+            // Flat 500 credits for all trial users (as per Paul's request)
+            const trialCredits = 500;
             user = await prisma.user.create({
                 data: {
                     email: email.toLowerCase().trim(),
@@ -81,7 +84,7 @@ export async function POST(request) {
                     lastName: 'User',
                     passwordHash: hashedPassword,
                     userType: 'free_claim', // Mark as free claim user
-                    credits: 3,
+                    credits: trialCredits,
                     hasUsedFreeTrial: true
                 }
             });
@@ -151,9 +154,12 @@ export async function POST(request) {
 
         // 7. Success
         // Generate Activation Token with Hibid URL
-        const token = generateActivationToken(user, 3, {
+        // Flat 500 credits for all trial users (as per Paul's request)
+        const trialCreditsForToken = 500;
+        const token = generateActivationToken(user, trialCreditsForToken, {
             hibid_url: url,
-            hibid_title: scrapedData.title
+            hibid_title: scrapedData.title,
+            trial_auction_item_count: scrapedData.itemCount
         });
         const mainAppUrl = process.env.MAIN_APP_URL || 'http://localhost:3001';
         const activationUrl = `${mainAppUrl}/auth/activate?token=${token}`;

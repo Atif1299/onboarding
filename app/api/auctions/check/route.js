@@ -77,9 +77,9 @@ export async function POST(request) {
     const price = calculatePrice(itemCount);
 
     // Trial Eligibility Logic:
-    // Limit free trials to auctions with 1000 items or fewer.
+    // Limit free trials to auctions with 10000 items or fewer.
     // If item count is unknown (lot page), allow trial.
-    const MAX_TRIAL_ITEMS = 1000;
+    const MAX_TRIAL_ITEMS = 10000;
     const isTrialEligible = itemCount === null || itemCount <= MAX_TRIAL_ITEMS;
 
     return NextResponse.json({
