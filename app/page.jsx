@@ -115,16 +115,32 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col">
-      {/* Compact Header */}
-      <header className="bg-white shadow-sm py-3 px-6 flex justify-center shrink-0">
-        <div className="relative w-40 h-10">
-          <Image
-            src="/images/bidsquire-logo.png"
-            alt="BidSquire Logo"
-            fill
-            className="object-contain"
-            priority
-          />
+      {/* Header with Sign In / Sign Up */}
+      <header className="bg-white shadow-sm py-3 px-6 shrink-0">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <div className="relative w-40 h-10">
+            <Image
+              src="/images/bidsquire-logo.png"
+              alt="BidSquire Logo"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+          <div className="flex items-center gap-3">
+            <a
+              href="https://app.bidsquire.com/auth/login"
+              className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+            >
+              Sign In
+            </a>
+            <Link
+              href="/signup"
+              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Sign Up Free
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -133,7 +149,7 @@ export default function Home() {
         <div className="max-w-6xl w-full grid md:grid-cols-2 gap-6 md:gap-8 items-start">
 
           {/* Left Column: Auction URL (PLG) */}
-          <div className="bg-slate-900 text-white rounded-2xl shadow-xl p-8 md:p-10 h-full flex flex-col justify-center">
+          <div className="bg-slate-900 text-white rounded-2xl shadow-xl p-8 md:p-10 h-full flex flex-col justify-center" suppressHydrationWarning>
             <div className="mb-6">
               <div className="inline-flex items-center justify-center p-3 bg-blue-600/20 rounded-full mb-4">
                 <Gavel className="h-8 w-8 text-blue-400" />
@@ -149,11 +165,12 @@ export default function Home() {
                 <ExternalLink className="absolute left-4 top-3.5 h-5 w-5 text-slate-400" />
                 <input
                   type="url"
-                  placeholder="https://hibid.com/lot/..."
+                  placeholder="https://hibid.com/catalog/..."
                   className="w-full pl-12 pr-4 py-4 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                   value={auctionUrl}
                   onChange={(e) => setAuctionUrl(e.target.value)}
                   required
+                  suppressHydrationWarning
                 />
               </div>
               <button
@@ -290,7 +307,17 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Result Modal */}
+      {/* Simple Signup CTA */}
+      <div className="bg-blue-600 py-8 px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+            Not sure where to start? Try BidSquire free.
+          </h2>
+          <p className="text-blue-100 text-lg">
+            Get 500 free credits — no credit card required. Sign up in 30 seconds.
+          </p>
+        </div>
+      </div>
       {countyStatus && !statusLoading && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm animate-in fade-in duration-200">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto relative animate-in zoom-in-95 duration-200">

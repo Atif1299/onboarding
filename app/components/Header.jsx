@@ -101,18 +101,18 @@ export default function Header() {
               </div>
             ) : (
               <div className="flex items-center gap-3">
-                {/* <Link
-                  href="/auth/signin"
+                <a
+                  href={process.env.NEXT_PUBLIC_MAIN_APP_URL ? `${process.env.NEXT_PUBLIC_MAIN_APP_URL}/auth/login` : 'https://app.bidsquire.com/auth/login'}
                   className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
                 >
                   Sign In
-                </Link>
+                </a>
                 <Link
-                  href="/auth/signup"
+                  href="/signup"
                   className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
                 >
-                  Sign Up
-                </Link> */}
+                  Sign Up Free
+                </Link>
               </div>
             )}
           </div>

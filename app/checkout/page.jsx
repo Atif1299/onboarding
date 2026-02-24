@@ -44,7 +44,7 @@ function CheckoutContent() {
           setOffer({
               name: 'Free Trial',
               price: 0,
-              description: 'One-time auction claim. Includes 1 free claims.'
+              description: 'Free trial with 500 credits. No credit card required.'
           });
       } else if (mode === 'single_auction') {
           setOffer({
