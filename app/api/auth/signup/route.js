@@ -14,6 +14,7 @@ import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import { generateActivationToken } from '@/lib/token';
 import { sendActivationEmail } from '@/lib/email';
+import { addSignupToActiveCampaign } from '@/lib/activecampaign';
 
 const prisma = new PrismaClient();
 
@@ -47,25 +48,11 @@ export async function POST(request) {
     });
 
     if (existingUser) {
-      // User already exists — generate a new activation token and resend email
-      // This is intentionally silent to avoid leaking whether the email is registered
-      const token = generateActivationToken(existingUser, 500);
-      const mainAppUrl = process.env.MAIN_APP_URL || 'http://localhost:3001';
-      const activationUrl = `${mainAppUrl}/auth/activate?token=${token}`;
-
-      console.log(`[Signup] Existing user ${normalizedEmail} — resending activation email`);
-      console.log('[Signup] Activation URL:', activationUrl);
-
-      try {
-        await sendActivationEmail(normalizedEmail, existingUser.firstName || firstName, activationUrl);
-      } catch (emailError) {
-        console.error('[Signup] Failed to resend activation email:', emailError);
-      }
-
-      return NextResponse.json({
-        success: true,
-        message: 'Check your email to activate your account!',
-      });
+      console.log(`[Signup] User already exists: ${normalizedEmail}`);
+      return NextResponse.json(
+        { success: false, error: 'An account with this email already exists. Please sign in instead.' },
+        { status: 409 }
+      );
     }
 
     // Generate a random password (user will set their real password via activation link)
@@ -107,13 +94,19 @@ export async function POST(request) {
       // Don't fail signup if email fails — user can request resend
     }
 
-    // Send welcome email
+    // Welcome email is sent AFTER the user activates their account (in activate.ts on the main app)
+    // Not here — sending it before activation is premature
+
+    // Add to Active Campaign with "Free Trial" tag
     try {
-      const { sendWelcomeEmail } = await import('@/lib/email');
-      await sendWelcomeEmail(user.email, user.firstName);
-      console.log(`[Signup] Welcome email sent to ${user.email}`);
-    } catch (emailError) {
-      console.error('[Signup] Failed to send welcome email:', emailError);
+      await addSignupToActiveCampaign({
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      });
+    } catch (acError) {
+      console.error('[Signup] Active Campaign error:', acError);
+      // Never block signup for AC failure
     }
 
     return NextResponse.json({
