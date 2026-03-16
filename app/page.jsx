@@ -160,7 +160,7 @@ export default function Home() {
               </p>
             </div>
 
-            <form onSubmit={handleAuctionCheck} className="space-y-4">
+            <form onSubmit={handleAuctionCheck} className="space-y-4" suppressHydrationWarning>
               <div className="relative">
                 <ExternalLink className="absolute left-4 top-3.5 h-5 w-5 text-slate-400" />
                 <input
@@ -176,6 +176,7 @@ export default function Home() {
               <button
                 type="submit"
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all transform hover:scale-[1.02] shadow-lg hover:shadow-blue-500/25 flex items-center justify-center gap-2"
+                suppressHydrationWarning
               >
                 Check Availability
                 <ArrowRight className="h-5 w-5" />
