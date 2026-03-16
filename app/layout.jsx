@@ -4,6 +4,11 @@ import Providers from './providers';
 export const metadata = {
   title: 'Offer Page - Find Your Exclusive County',
   description: 'Select your state and county to see available subscription plans and unlock your potential.',
+  icons: {
+    icon: '/images/bidsquire-logo.png',
+    shortcut: '/images/bidsquire-logo.png',
+    apple: '/images/bidsquire-logo.png',
+  },
 };
 
 export default function RootLayout({ children }) {

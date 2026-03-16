@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+button, 
+[role="button"],
+a.btn,
+.btn {
+  user-select: none;
+  -webkit-user-select: none;
+  text-decoration: none;
+}
+
+button:focus,
+[role="button"]:focus {
+  text-decoration: none;
+}
