@@ -74,13 +74,13 @@ export default function SignupPage() {
       <header className="bg-white border-b border-gray-200 shadow-sm">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center">
+            <a href="https://www.bidsquire.com" className="flex items-center">
               <img
                 src="/images/bidsquire-logo.png"
                 alt="BidSquire"
                 className="h-10 w-auto"
               />
-            </Link>
+            </a>
             <div className="flex items-center gap-3">
               <span className="text-sm text-gray-500">Already have an account?</span>
               <a

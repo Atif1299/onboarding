@@ -118,7 +118,7 @@ export default function Home() {
       {/* Header with Sign In / Sign Up */}
       <header className="bg-white shadow-sm py-3 px-6 shrink-0">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="relative w-40 h-10">
+          <a href="https://www.bidsquire.com" className="relative w-40 h-10 block">
             <Image
               src="/images/bidsquire-logo.png"
               alt="BidSquire Logo"
@@ -126,7 +126,7 @@ export default function Home() {
               className="object-contain"
               priority
             />
-          </div>
+          </a>
           <div className="flex items-center gap-3">
             <a
               href="https://app.bidsquire.com/auth/login"

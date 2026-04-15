@@ -35,14 +35,14 @@ export default function Header() {
     <header className="bg-white border-b border-gray-200 shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center">
+          {/* Logo - links to marketing site */}
+          <a href="https://www.bidsquire.com" className="flex items-center">
             <img
               src="/images/bidsquire-logo.png"
               alt="BidSquire Logo"
               className="h-10 w-auto"
             />
-          </Link>
+          </a>
 
           {/* User Info or Auth Links */}
           <div className="flex items-center gap-4">
